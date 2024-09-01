@@ -1,0 +1,42 @@
+Steps To Run
+
+-> run $make
+-> For question1
+     -> $ ./question1
+-> For question2
+     -> $ ./question2
+-> For question3
+     -> $ ./question3
+
+
+Description
+
+Question1:
+
+Program that simulates a restaurant with a capacity of N diners, and T total diners waiting outside.
+The program uses mutexes and condition variables to ensure that only N diners can enter the restaurant 
+at a time, and that the restaurant waits until it is full before starting service.Once all diners are served, the program unlocks the front door to allow the next batch of diners to enter.
+The program creates two types of threads, one for the restaurant and another for the diners.
+The restaurant thread waits for the diners to fill the restaurant, serves them, and waits for all diners to leave before unlocking the front door.Each diner thread waits for the restaurant to signal that it is full before entering, and signals the restaurant before leaving. Finally, the program joins all threads before terminating.
+
+Question 2:
+
+The program has two cases, and both cases represent different safety protocols for crossing the bridge. The simulation is done using threads, where each thread represents a person crossing the bridge.
+
+In case 1, the simulation ensures that there are no more than CAP people on the bridge at any given time. Additionally, the direction of the vehicles on the bridge is maintained by allowing people to cross the bridge only if the direction is the same as the direction of the first person who entered the bridge.
+
+In case 2, the simulation ensures that there are no more than CAP people on the bridge at any given time, regardless of their direction.
+
+Both cases have two functions, enterBridge() and exitBridge(), which represent entering and exiting the critical section where people are crossing the bridge. The enterBridge() function locks the bridgeMutex, waits for the condition when the bridge capacity exceeds and there are people coming from other direction in case 1 or when the bridge capacity is full in case 2. The exitBridge() function unlocks the bridgeMutex and signals the threads waiting on the emptyBridge condition variable.
+
+Each case has two worker functions, northWorker() and southWorker(), which represent people crossing the bridge from the north and south, respectively. In both cases, after entering the critical section using enterBridge() function, the thread sleeps for CROSSTIME to simulate crossing the bridge. After sleeping, the thread exits the critical section using exitBridge() function.
+
+Question 3:
+
+This program is a simulation of a service system that receives incoming requests and allocates them to workers for service. The system consists of n different services, each with m workers. The main function reads input from a file containing a list of requests and then spawns n service threads, each of which reads input for its workers and services the requests assigned to it.
+
+Each request has a service number, a required amount of resources, and a unique ID. The system attempts to allocate each request to a worker with sufficient resources and the highest priority. If no worker is available to serve a request, the request is placed in a queue and waits for a worker to become available. If the required resources for a request are not available, the request is also placed in a queue and waits for the resources to become available.
+
+The simulation keeps track of whether each request can be served or not, whether it waited due to high traffic, and how long it took to be served. It also outputs information about each request to an output file.
+
+The code uses multiple threads to simulate the service system, including worker threads and service threads. It also uses several synchronization mechanisms, such as mutexes and condition variables, to ensure thread safety and prevent race conditions. 
